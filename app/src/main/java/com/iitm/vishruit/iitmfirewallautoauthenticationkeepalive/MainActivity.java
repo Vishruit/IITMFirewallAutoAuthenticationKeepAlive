@@ -1,15 +1,21 @@
 package com.iitm.vishruit.iitmfirewallautoauthenticationkeepalive;
 
 import android.app.Activity;
+import android.net.http.SslError;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+
+    String url = "https://nfw.iitm.ac.in:1003/login?";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +42,32 @@ public class MainActivity extends Activity {
         });
     }
 
+    private class MyBrowser extends WebViewClient {
+
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            handler.proceed();
+            // Ignore SSL certificate errors
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setContentView(R.layout.activity_login);
+    }
+
     private void mainActivityEnv() {
         WebView myWebView = (WebView) findViewById(R.id.webView);
-        myWebView.loadUrl("www.yahoo.com");
+
+        myWebView.getSettings().setLoadsImagesAutomatically(true);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
+        myWebView.setWebChromeClient(new WebChromeClient());
+        myWebView.setWebViewClient(new MyBrowser());
+        myWebView.loadUrl(url);
     }
+
+
 }
