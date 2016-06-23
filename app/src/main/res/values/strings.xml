@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">IITM Firewall Auto Authentication KeepAlive</string>
+    <string name="welcome">Welcome \nto \nAuto Authenticator App</string>
+    <string name="askLogin">Please enter your login credentials</string>
+    <string name="ldap_password">LDAP password</string>
+    <string name="password">Password</string>
+    <string name="enter_your_iitm_roll_number_7_alphanumerics">Enter your IITM Roll Number (7 alphanumerics)</string>
+    <string name="roll_number">Roll Number</string>
 </resources>
