@@ -14,5 +14,16 @@
         android:text="Hello World!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_hello" />
+        android:id="@+id/tv_hello"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <WebView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/webView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/tv_hello"
+        android:layout_toEndOf="@+id/tv_hello" />
 </RelativeLayout>
