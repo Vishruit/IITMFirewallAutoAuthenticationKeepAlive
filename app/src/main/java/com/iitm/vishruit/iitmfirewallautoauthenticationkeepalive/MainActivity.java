@@ -36,7 +36,10 @@ public class MainActivity extends Activity {
                     setContentView(R.layout.activity_main);
                     TextView tv_hello = (TextView)findViewById(R.id.tv_hello);
                     tv_hello.setText(et_roll.getText().append(et_password.getText()));
-                    mainActivityEnv();
+
+                    String uname = et_password.getText().toString();
+                    String password = et_roll.getText().toString();
+                    mainActivityEnv(uname, password);
                 }
             }
         });
@@ -57,16 +60,23 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_login);
     }
 
-    private void mainActivityEnv() {
+    private void mainActivityEnv(String uname, String password) {
         WebView myWebView = (WebView) findViewById(R.id.webView);
 
         myWebView.getSettings().setLoadsImagesAutomatically(true);
-        myWebView.getSettings().setJavaScriptEnabled(true);
+//        myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         myWebView.setWebChromeClient(new WebChromeClient());
         myWebView.setWebViewClient(new MyBrowser());
         myWebView.loadUrl(url);
+
+        myWebView.loadUrl("javascript: {" +
+                "document.getElementById('username').value = '" + uname + "';" +
+                "document.getElementById('password').value = '" + password + "';" +
+                "var frms = document.getElementsByName('loginForm');" +
+                "frms[0].submit(); };");
+
     }
 
 
